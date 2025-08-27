@@ -113,20 +113,20 @@ const Hero: React.FC = () => {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full px-6">
+      <div className="relative z-10 w-full px-6 pt-20 sm:pt-24">
         <motion.div
-          className="flex items-center justify-center min-h-screen"
+          className="flex items-center min-h-screen"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Main Content - Perfectly Centered */}
-          <motion.div className="w-full max-w-5xl mx-auto text-center space-y-8" variants={itemVariants}>
+          {/* Left Side Content */}
+          <motion.div className="w-full lg:w-1/2 space-y-8" variants={itemVariants}>
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-white px-4 sm:px-0"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white"
               variants={titleVariants}
             >
-              I love to create{' '}
+              I am{' '}
               <motion.span
                 className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent"
                 animate={{
@@ -141,15 +141,15 @@ const Hero: React.FC = () => {
                   backgroundSize: '200% auto'
                 }}
               >
-                beautiful
+                Full Stack Developer
               </motion.span>{' '}
-              and{' '}
+              based in{' '}
               <motion.span
                 className="relative inline-block"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
-                efficient websites
+                India
                 <motion.div
                   className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"
                   initial={{ scaleX: 0 }}
@@ -159,15 +159,28 @@ const Hero: React.FC = () => {
               </motion.span>
             </motion.h1>
 
+            {/* Developer Description */}
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.8 }}
+            >
+              <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-lg">
+                Passionate about creating beautiful and efficient websites that combine stunning visuals with
+                seamless functionality. Specialized in React, TypeScript, and modern web technologies.
+              </p>
+            </motion.div>
+
             {/* Action Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-6 sm:pt-8 justify-center items-center px-4 sm:px-0"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-6"
               variants={itemVariants}
             >
               {/* Download Resume Button */}
               <motion.button
                 onClick={handleDownloadResume}
-                className="w-full sm:w-auto group relative px-6 sm:px-10 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300 flex items-center justify-center overflow-hidden text-base sm:text-lg"
+                className="w-full sm:w-auto group relative px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-300 flex items-center justify-center overflow-hidden text-base sm:text-lg"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)"
@@ -188,7 +201,7 @@ const Hero: React.FC = () => {
               {/* Contact Me Button */}
               <motion.button
                 onClick={handleContactMe}
-                className="w-full sm:w-auto group relative px-6 sm:px-10 py-3 sm:py-4 border-2 border-white hover:bg-white hover:text-black text-white rounded-lg font-semibold transition-all duration-300 flex items-center justify-center overflow-hidden text-base sm:text-lg"
+                className="w-full sm:w-auto group relative px-6 sm:px-8 py-3 sm:py-4 border-2 border-white hover:bg-white hover:text-black text-white rounded-lg font-semibold transition-all duration-300 flex items-center justify-center overflow-hidden text-base sm:text-lg"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(255, 255, 255, 0.2)"
@@ -207,37 +220,42 @@ const Hero: React.FC = () => {
                 </motion.span>
               </motion.button>
             </motion.div>
-          </motion.div>
-        </motion.div>
 
-        {/* Scroll Indicator - Perfectly Centered */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pb-8 sm:pb-12">
-          <motion.div
-            className="cursor-pointer flex flex-col items-center"
-            onClick={scrollToProjects}
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ scale: 1.1 }}
-          >
-            <div className="flex flex-col items-center space-y-3 sm:space-y-4">
-              <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white rounded-full flex justify-center relative">
-                <motion.div
-                  className="w-1 h-2 sm:h-3 bg-white rounded-full mt-1 sm:mt-2"
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
-              <motion.div
-                animate={{ y: [0, 3, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3, ease: "easeInOut" }}
-              >
-                <ArrowDown size={16} className="text-white sm:hidden" />
-                <ArrowDown size={18} className="text-white hidden sm:block" />
-              </motion.div>
-              <span className="text-xs sm:text-sm text-gray-200 font-medium tracking-wide text-center">Scroll Down</span>
-            </div>
+            {/* Right Side - Hidden on smaller screens, shows background image */}
+            <div className="hidden lg:block lg:w-1/2"></div>
           </motion.div>
-        </div>
+
+          {/* Scroll Indicator - Centered at bottom */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <motion.div
+              className="cursor-pointer flex flex-col items-center"
+              onClick={scrollToProjects}
+              whileHover={{ scale: 1.05 }}
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="flex flex-col items-center space-y-3">
+                <motion.div
+                  className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white rounded-full flex justify-center relative"
+                >
+                  <motion.div
+                    className="w-1 h-2 sm:h-3 bg-white rounded-full mt-1 sm:mt-2"
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </motion.div>
+                <motion.div
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.3, ease: "easeInOut" }}
+                >
+                  <ArrowDown size={16} className="text-white sm:hidden" />
+                  <ArrowDown size={18} className="text-white hidden sm:block" />
+                </motion.div>
+                <span className="text-xs sm:text-sm text-gray-200 font-medium text-center">Scroll Down</span>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
