@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, Phone, MapPin, Github, Linkedin, Twitter, ArrowUpRight } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import EmailService, { type EmailFormData } from '../../utils/emailService';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+  const [formData, setFormData] = useState<EmailFormData>({
+    user_name: '',
+    user_email: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,25 +25,24 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setStatusMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const result = await EmailService.sendEmail(formData);
 
-      if (response.ok) {
+      if (result.success) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
+        setStatusMessage(result.message);
+        // Reset form on success
+        setFormData({ user_name: '', user_email: '', message: '' });
       } else {
         setSubmitStatus('error');
+        setStatusMessage(result.message);
       }
     } catch (error) {
-      console.error('Error sending email:', error);
       setSubmitStatus('error');
+      setStatusMessage('An unexpected error occurred. Please try again.');
+      console.error('Contact form error:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -265,14 +266,14 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="user_name" className="block text-sm font-medium text-gray-300 mb-2">
                     Your Name
                   </label>
                   <motion.input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    id="user_name"
+                    name="user_name"
+                    value={formData.user_name}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 group-hover:border-gray-600"
@@ -289,14 +290,14 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="user_email" className="block text-sm font-medium text-gray-300 mb-2">
                     Email Address
                   </label>
                   <motion.input
                     type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
+                    id="user_email"
+                    name="user_email"
+                    value={formData.user_email}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 group-hover:border-gray-600"
@@ -376,7 +377,7 @@ const Contact: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
                     >
-                      Message sent successfully! I'll get back to you soon.
+                      {statusMessage}
                     </motion.div>
                   </motion.div>
                 )}
@@ -393,7 +394,7 @@ const Contact: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
                     >
-                      Failed to send message. Please try again or contact me directly.
+                      {statusMessage}
                     </motion.div>
                   </motion.div>
                 )}

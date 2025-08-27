@@ -10,6 +10,7 @@ lerna-debug.log*
 # Lock files
 yarn.lock
 package-lock.json
+.env
 
 node_modules
 dist
