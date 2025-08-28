@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Send, Mail, Github, Linkedin, Instagram } from 'lucide-react';
 import EmailService, { type EmailFormData } from '../../utils/emailService';
 
 const Contact: React.FC = () => {
@@ -49,9 +49,9 @@ const Contact: React.FC = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/yourusername', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/yourusername', label: 'Twitter' },
+    { icon: Github, href: 'https://github.com/TejoVarma', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/tejo-varma-alluri-666860184', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/im._.tejo/', label: 'Instagram' },
   ];
 
   const contactInfo = [
@@ -62,16 +62,10 @@ const Contact: React.FC = () => {
       href: 'mailto:tejo.varma.alluri@gmail.com'
     },
     {
-      icon: Phone,
-      label: 'Phone',
-      value: '+91 XXXX XXXX XX',
-      href: 'tel:+91XXXXXXXXXX'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Visakhapatnam, India',
-      href: '#'
+      icon: Instagram,
+      label: 'Instagram',
+      value: '@im._.tejo',
+      href: 'https://www.instagram.com/im._.tejo/'
     }
   ];
 
