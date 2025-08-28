@@ -8,13 +8,35 @@ const Hero: React.FC = () => {
   const [isContactHovered, setIsContactHovered] = useState(false);
 
   const handleDownloadResume = () => {
-    // Create a dummy PDF download
-    const link = document.createElement('a');
-    link.href = '/resume.pdf'; // You'll need to add your actual resume
-    link.download = 'Tejo_Varma_Alluri_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Google Drive direct download method
+    // Your Google Drive file ID
+    const fileId = '1QgQT2bi2JDkKKkHnvgtoVzQXFYbHvO_a';
+    const directDownloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+    // Alternative: Open in new tab for viewing first
+    // const viewUrl = `https://drive.google.com/file/d/${fileId}/view`;
+
+    try {
+      // Method 1: Direct download
+      const link = document.createElement('a');
+      link.href = directDownloadUrl;
+      link.download = 'Tejo_Varma_Alluri_Resume.pdf';
+      link.target = '_blank'; // Fallback to new tab if download fails
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Download failed:', error);
+      // Fallback: Open in new tab
+      window.open(directDownloadUrl, '_blank');
+    }
+  };
+
+  // Alternative method for better user experience
+  const handleViewResume = () => {
+    const fileId = '1QgQT2bi2JDkKKkHnvgtoVzQXFYbHvO_a';
+    const viewUrl = `https://drive.google.com/file/d/${fileId}/view`;
+    window.open(viewUrl, '_blank');
   };
 
   const handleContactMe = () => {
@@ -190,10 +212,11 @@ const Hero: React.FC = () => {
                 onHoverEnd={() => setIsDownloadHovered(false)}
               >
                 <motion.span
-                  className="relative z-10"
+                  className="flex items-center"
                   animate={isDownloadHovered ? { x: -5 } : { x: 0 }}
                   transition={{ duration: 0.2 }}
                 >
+                  <Download size={18} className="mr-2" />
                   Download Resume
                 </motion.span>
               </motion.button>
