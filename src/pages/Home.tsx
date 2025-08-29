@@ -4,6 +4,7 @@ import Hero from '../components/hero/Hero';
 import Projects from '../components/projects/Projects';
 import Contact from '../components/contact/Contact';
 import MouseFollower from '../components/ui/MouseFollower';
+import AboutExplorer from '../components/about_me/AboutExplorer';
 
 const Home: React.FC = () => {
   return (
@@ -19,6 +20,9 @@ const Home: React.FC = () => {
 
       {/* Projects Section */}
       <Projects />
+
+      {/* About Section */}
+      <AboutExplorer />
 
       {/* Contact Section */}
       <Contact />
