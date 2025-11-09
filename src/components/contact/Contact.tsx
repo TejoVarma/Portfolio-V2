@@ -58,8 +58,8 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'tejo.varma.alluri@gmail.com',
-      href: 'mailto:tejo.varma.alluri@gmail.com'
+      value: 'tejovarma.alluri9@gmail.com',
+      href: 'mailto:tejovarma.alluri9@gmail.com'
     },
     {
       icon: Instagram,
