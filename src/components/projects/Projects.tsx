@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -9,7 +9,6 @@ interface Project {
   image: string;
   technologies: string[];
   githubUrl: string;
-  liveUrl: string;
   number: string;
 }
 
@@ -18,32 +17,29 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "My Portfolio",
-      description: "Ohh this!! its just the same website that you are looking it. Its also my favourite works. So had to put it at the top. Worked on framer-motion, got to contribute to react-bits(open-source library) because of a bug i encountered",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
-      technologies: ["react", "typescript"],
-      githubUrl: "https://github.com/yourusername/portfolio",
-      liveUrl: "https://your-portfolio.com",
+      title: "MILES Car Rental",
+      description: "A comprehensive car rental application built with modern web technologies. Features include vehicle browsing, booking system, user authentication, payment processing, and admin dashboard for fleet management. Clean UI with responsive design and smooth user experience.",
+      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      technologies: ["react", "node.js", "mongodb", "express"],
+      githubUrl: "https://github.com/TejoVarma/MILES-CAR-RENTAL",
       number: "01"
     },
     {
       id: 2,
-      title: "E-Commerce Platform",
-      description: "A comprehensive e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, payment integration, inventory management, and admin dashboard with real-time analytics.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
-      technologies: ["react", "node.js", "mongodb", "stripe"],
-      githubUrl: "https://github.com/yourusername/ecommerce",
-      liveUrl: "https://your-ecommerce-demo.com",
+      title: "My Portfolio",
+      description: "Ohh this!! its just the same website that you are looking at. Its also one of my favourite works. Worked on framer-motion, got to contribute to react-bits(open-source library) because of a bug I encountered. Features smooth animations and modern design patterns.",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      technologies: ["react", "typescript", "framer-motion"],
+      githubUrl: "https://github.com/yourusername/portfolio",
       number: "02"
     },
     {
       id: 3,
-      title: "Task Management App",
-      description: "A modern task management application with real-time collaboration features. Built with React, TypeScript, and Socket.io for instant updates across team members with beautiful animations and intuitive design.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2339&q=80",
-      technologies: ["react", "typescript", "socket.io", "express"],
-      githubUrl: "https://github.com/yourusername/taskmanager",
-      liveUrl: "https://your-taskmanager-demo.com",
+      title: "InstaClone - Basic Version",
+      description: "A basic Instagram clone built while learning full-stack JavaScript development. Features fundamental social media functionalities like user posts, basic feed display, and simple interactions. This project helped me understand the MERN stack fundamentals and core web development concepts.",
+      image: "https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80",
+      technologies: ["react", "node.js", "mongodb", "express"],
+      githubUrl: "https://github.com/TejoVarma/INSTACLONE-FULLSTACK",
       number: "03"
     }
   ];
@@ -53,6 +49,7 @@ const Projects: React.FC = () => {
     const icons: { [key: string]: string } = {
       'react': '⚛️',
       'typescript': 'TS',
+      'framer-motion': '🎭',
       'node.js': '🟢',
       'mongodb': '🍃',
       'stripe': '💳',
@@ -66,6 +63,7 @@ const Projects: React.FC = () => {
     const colors: { [key: string]: string } = {
       'react': 'text-blue-400',
       'typescript': 'text-blue-500',
+      'framer-motion': 'text-purple-400',
       'node.js': 'text-green-400',
       'mongodb': 'text-green-500',
       'stripe': 'text-purple-400',
@@ -176,7 +174,7 @@ const Projects: React.FC = () => {
 
                     {/* Hover Overlay */}
                     <motion.div
-                      className="absolute inset-0 bg-black/40 flex items-center justify-center space-x-6 opacity-0 group-hover:opacity-100"
+                      className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100"
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <motion.a
@@ -188,16 +186,6 @@ const Projects: React.FC = () => {
                         whileTap={{ scale: 0.9 }}
                       >
                         <Github size={24} />
-                      </motion.a>
-                      <motion.a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 bg-blue-600/80 rounded-full text-white hover:bg-blue-500 transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <ArrowUpRight size={24} />
                       </motion.a>
                     </motion.div>
                   </div>
@@ -249,24 +237,13 @@ const Projects: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex space-x-4 pt-4">
-                    <motion.a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <ExternalLink className="mr-2" size={18} />
-                      Live Demo
-                    </motion.a>
+                  {/* Action Button */}
+                  <div className="pt-4">
                     <motion.a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center px-6 py-3 border border-gray-600 text-gray-300 rounded-lg font-semibold hover:border-gray-500 hover:text-white transition-colors"
+                      className="inline-flex items-center px-6 py-3 bg-gray-900 border border-gray-600 text-gray-300 rounded-lg font-semibold hover:border-gray-500 hover:text-white hover:bg-gray-800 transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
